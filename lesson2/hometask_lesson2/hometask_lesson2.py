@@ -1,4 +1,1 @@
-print("Hello, World")
-print("It is my first python program")
-print("And it is the end of my program")
-print("Bye-bye")
+print("Hello, World", "It is my first python program", "And it is the end of my program", "Bye-bye", sep='\n')

@@ -1,5 +1,5 @@
-current_year = 2025
-birth_year = ""
+from datetime import date
+current_year = date.today().year
 try:
     birth_year = int(input("Введите дату своего рождения: "))
     if birth_year > current_year:
