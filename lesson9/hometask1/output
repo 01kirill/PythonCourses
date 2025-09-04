@@ -1,0 +1,11 @@
+Пример вывода работы программы:
+/home/kirill/Desktop/courses/.venv/bin/python /home/kirill/Desktop/courses/lesson9/hometask1/hometask1.py
+Имя операционной системы: Unix/Linux/MacOS
+Путь к папке, в которой мы находимся: /home/kirill/Desktop/courses/lesson9/hometask1
+В папку txt было перемещено 3 файлов, их суммарный размер - 31 байт
+В папку json было перемещено 2 файлов, их суммарный размер - 121 байт
+В папку csv было перемещено 1 файлов, их суммарный размер - 8 байт
+В папку py было перемещено 3 файлов, их суммарный размер - 74 байт
+Файл file3.txt был переименован в файл renamed_file3.txt
+
+Process finished with exit code 0
