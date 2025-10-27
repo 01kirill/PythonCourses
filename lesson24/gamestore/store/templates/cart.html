@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Корзина</h2>
+{% if cart_games %}
+  <ul class="cart-list">
+    {% for game in cart_games %}
+      <li>
+        {{ game.title }} — {{ game.price }} ₽
+        <a href="{% url 'store:cart_remove' game.id %}">Удалить</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <p><strong>Итого: {{ total }} ₽</strong></p>
+  {% if user.is_authenticated %}
+    <a class="btn" href="{% url 'store:make_order' %}">Оформить заказ</a>
+  {% else %}
+    <p>Для оформления заказа нужно <a href="{% url 'store:login' %}">войти</a>.</p>
+  {% endif %}
+{% else %}
+  <p>Корзина пуста.</p>
+{% endif %}
+{% endblock %}

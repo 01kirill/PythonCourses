@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Каталог игр</h2>
+<div class="game-list">
+  {% for game in games %}
+  <div class="game-item">
+    {% if game.image %}
+      <img src="{{ game.image.url }}" alt="{{ game.title }}" class="thumb">
+    {% else %}
+      <img src="{% static 'images/no-image.png' %}" alt="Нет изображения" class="thumb">
+    {% endif %}
+    <h3><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></h3>
+    <p>{{ game.price }} ₽</p>
+    <a class="btn" href="{% url 'store:cart_add' game.id %}">Добавить в корзину</a>
+  </div>
+  {% empty %}
+    <p>Пока нет доступных игр.</p>
+  {% endfor %}
+</div>
+{% endblock %}
