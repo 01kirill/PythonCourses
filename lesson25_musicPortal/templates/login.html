@@ -1,25 +1,32 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Вход</title>
-</head>
-<body>
-    <h1>Вход</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Вход{% endblock %}
 
-    <form method="post">
-        {% csrf_token %}
-        <p>
-            <label>Имя пользователя:</label><br>
-            <input type="text" name="username">
-        </p>
-        <p>
-            <label>Пароль:</label><br>
-            <input type="password" name="password">
-        </p>
-        <button type="submit">Войти</button>
-    </form>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
-    <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
-</body>
-</html>
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="auth-title">Вход</h2>
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            <div class="form-wrapper">
+                {{ form.as_p }}
+            </div>
+            {% if form.non_field_errors %}
+                <div class="error-list non-field">
+                    {% for error in form.non_field_errors %}
+                        <small class="error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-block">Войти</button>
+        </form>
+        <p class="auth-footer">
+            Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
