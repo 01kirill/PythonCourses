@@ -1,10 +1,11 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from app.forms import RegisterForm, LoginForm
-from app.models import Genre, Song
+from app.models import Genre, Song, Artist, Album
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -51,5 +52,14 @@ def main_view(request):
         'selected_genre': genre_id
     })
 
-def artist_view(request):
-    return render(request, 'artist.html')
+@login_required(login_url='/login/')
+def artist_view(request, artist_id):
+    artist = get_object_or_404(Artist, id=artist_id)
+    songs = Song.objects.filter(artist=artist).select_related('album', 'genre').order_by('title')
+    albums = Album.objects.filter(artist=artist).order_by('-release_year', 'title')
+
+    return render(request, 'artist.html', {
+        'artist': artist,
+        'songs': songs,
+        'albums': albums
+    })

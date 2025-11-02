@@ -44,7 +44,7 @@
             <div class="song-info">
                 <h3 class="song-title">{{ song.title }}</h3>
                 <p class="song-meta">
-                    <strong>Артист:</strong> <a href="{% url 'artist' %}" class="link">{{ song.artist.name }}</a><br>
+                    <strong>Артист:</strong> <a href="{% url 'artist' song.artist.id %}" class="link">{{ song.artist.name }}</a><br>
                     <strong>Альбом:</strong> {{ song.album.title }}<br>
                     <strong>Жанр:</strong> <span class="genre-badge">{{ song.genre.name }}</span>
                 </p>

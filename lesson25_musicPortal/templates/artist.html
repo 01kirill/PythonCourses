@@ -1,8 +1,105 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}{{ artist.name }} — Артист{% endblock %}
 
-{% block title %} Информация об артисте {% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
 
 {% block content %}
+<div class="container">
+    <!-- Профиль артиста -->
+    <div class="artist-profile">
+        <!-- Фото -->
+        <div>
+            {% if artist.image %}
+                <img src="{{ artist.image.url }}" alt="{{ artist.name }}" class="artist-photo">
+            {% else %}
+                <div class="artist-photo-placeholder">Фото отсутствует</div>
+            {% endif %}
+        </div>
 
+        <!-- Информация -->
+        <div class="artist-info">
+            <h1 class="artist-name">{{ artist.name }}</h1>
+
+            {% if artist.date %}
+                <p class="artist-birthdate">
+                    Дата рождения: {{ artist.date|date:"d.m.Y" }}
+                </p>
+            {% endif %}
+
+            <p class="artist-stats">
+                Всего альбомов: <strong>{{ albums|length }}</strong> |
+                Всего песен: <strong>{{ songs|length }}</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Альбомы -->
+    {% if albums %}
+    <section class="albums-section">
+        <h2 class="albums-title">Альбомы</h2>
+        <div class="albums-grid">
+            {% for album in albums %}
+            <article class="album-card">
+                <div class="album-cover">
+                    {% if album.cover %}
+                        <img src="{{ album.cover.url }}" alt="{{ album.title }}">
+                    {% else %}
+                        <img src="{% static 'no-image.png' %}" alt="Нет обложки">
+                    {% endif %}
+                </div>
+                <div class="album-info">
+                    <h3 class="album-title">{{ album.title }}</h3>
+                    {% if album.release_year %}
+                        <p class="album-year">{{ album.release_year }}</p>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Песни -->
+    <h2 class="songs-title">Песни артиста</h2>
+
+    {% if songs %}
+        <div class="songs-grid">
+            {% for song in songs %}
+            <article class="song-card">
+                <div class="song-cover">
+                    {% if song.album.cover %}
+                        <img src="{{ song.album.cover.url }}" alt="{{ song.title }}">
+                    {% else %}
+                        <img src="{% static 'img/no-image.png' %}" alt="Нет обложки">
+                    {% endif %}
+                </div>
+                <div class="song-info">
+                    <h3 class="song-title">{{ song.title }}</h3>
+                    <p class="song-meta">
+                        {% if song.album %}
+                            <strong>Альбом:</strong> {{ song.album.title }}<br>
+                        {% endif %}
+                        {% if song.genre %}
+                            <strong>Жанр:</strong> <span class="genre-badge">{{ song.genre.name }}</span>
+                        {% endif %}
+                    </p>
+                    {% if song.audio_file %}
+                        <audio controls class="audio-player">
+                            <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+                            Ваш браузер не поддерживает аудио.
+                        </audio>
+                    {% else %}
+                        <p class="no-audio">Аудиофайл отсутствует</p>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">У этого артиста пока нет загруженных песен.</p>
+    {% endif %}
+</div>
 {% endblock %}
