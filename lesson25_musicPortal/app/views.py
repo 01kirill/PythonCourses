@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
@@ -18,6 +19,7 @@ def register_view(request):
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
 
+@login_required(login_url='/login/')
 def main_view(request):
     genres = Genre.objects.all()
     genre_id = request.GET.get('genre')
