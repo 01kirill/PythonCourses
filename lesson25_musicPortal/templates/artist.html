@@ -4,6 +4,7 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/artist.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -73,7 +74,7 @@
                     {% if song.album.cover %}
                         <img src="{{ song.album.cover.url }}" alt="{{ song.title }}">
                     {% else %}
-                        <img src="{% static 'img/no-image.png' %}" alt="Нет обложки">
+                        <img src="{% static 'no-image.png' %}" alt="Нет обложки">
                     {% endif %}
                 </div>
                 <div class="song-info">

@@ -1,0 +1,122 @@
+.artist-profile {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+}
+
+.artist-photo {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #50c878;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.artist-photo-placeholder {
+    width: 220px;
+    height: 220px;
+    background: #1e1e2e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #50c878;
+    color: #666;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.artist-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.artist-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #50c878;
+}
+
+.artist-birthdate {
+    color: #50c878;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.artist-stats {
+    color: #aaa;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+.artist-stats strong {
+    color: #50c878;
+}
+
+.songs-title {
+    color: #50c878;
+    margin: 2rem 0 1.5rem;
+    font-size: 1.9rem;
+    border-bottom: 1px solid rgba(80, 200, 120, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.albums-section {
+    margin: 3rem 0 2rem;
+}
+
+.albums-title {
+    color: #50c878;
+    margin: 0 0 1.5rem;
+    font-size: 1.9rem;
+    border-bottom: 1px solid rgba(80, 200, 120, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.album-card {
+    background: rgba(30, 35, 55, 0.8);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(80, 200, 120, 0.2);
+    text-align: center;
+}
+
+.album-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.album-cover img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.album-info {
+    padding: 1rem;
+}
+
+.album-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+
+.album-year {
+    font-size: 0.9rem;
+    color: #aaa;
+}
