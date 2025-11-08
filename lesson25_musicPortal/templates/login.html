@@ -15,6 +15,9 @@
             <div class="form-wrapper">
                 {{ form.as_p }}
             </div>
+            {% load socialaccount %}
+            <h3>Войти через соцсети:</h3>
+            <a href="{% provider_login_url 'github' %}" class="btn btn-dark">GitHub</a>
             {% if form.non_field_errors %}
                 <div class="error-list non-field">
                     {% for error in form.non_field_errors %}

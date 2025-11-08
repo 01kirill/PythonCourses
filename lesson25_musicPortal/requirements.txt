@@ -6,3 +6,5 @@ psycopg2-binary
 pillow
 dotenv
 django-debug-toolbar
+django-allauth
+requests
