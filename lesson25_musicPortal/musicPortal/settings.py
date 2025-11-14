@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'app.apps.AppConfig',
     'debug_toolbar',
+    'rest_framework',
+    'api',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

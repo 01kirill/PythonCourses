@@ -8,3 +8,5 @@ dotenv
 django-debug-toolbar
 django-allauth
 requests
+django-rest-framework
+drf-yasg
