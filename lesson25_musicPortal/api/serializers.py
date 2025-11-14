@@ -48,6 +48,11 @@ class AlbumSerializer(serializers.ModelSerializer):
         model = Album
         fields = ['id', 'title', 'artist', 'artist_id', 'cover', 'release_year']
 
+    def create(self, validated_data):
+        artist = validated_data.pop('artist_id')
+        validated_data['artist_id'] = artist.id
+        return super().create(validated_data)
+
 class SongSerializer(serializers.ModelSerializer):
     artist = ArtistSerializer(read_only=True)
     album = AlbumSerializer(read_only=True)
@@ -80,3 +85,17 @@ class SongSerializer(serializers.ModelSerializer):
             'genre', 'genre_id',
             'audio_file',
         ]
+
+    def create(self, validated_data):
+        artist = validated_data.pop('artist_id')
+        validated_data['artist_id'] = artist.id
+
+        album = validated_data.pop('album_id', None)
+        if album:
+            validated_data['album_id'] = album.id
+
+        genre = validated_data.pop('genre_id', None)
+        if genre:
+            validated_data['genre_id'] = genre.id
+
+        return super().create(validated_data)
