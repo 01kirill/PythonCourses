@@ -5,7 +5,15 @@ from .views import (
     UserCreateView,
     UserDetailView,
     UserUpdateView,
-    UserDeleteView
+    UserDeleteView,
+    GenreListCreateView,
+    GenreRetrieveUpdateDestroyView,
+    ArtistListCreateView,
+    ArtistRetrieveUpdateDestroyView,
+    AlbumListCreateView,
+    AlbumRetrieveUpdateDestroyView,
+    SongListCreateView,
+    SongRetrieveUpdateDestroyView
 )
 
 urlpatterns = [
@@ -15,4 +23,12 @@ urlpatterns = [
     path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
     path('users/<int:pk>/update/', UserUpdateView.as_view(), name='user-update'),
     path('users/<int:pk>/delete/', UserDeleteView.as_view(), name='user-delete'),
+    path('genres/', GenreListCreateView.as_view(), name='genre-list-create'),
+    path('genres/<int:pk>/', GenreRetrieveUpdateDestroyView.as_view(), name='genre-detail'),
+    path('artists/', ArtistListCreateView.as_view(), name='artist-list-create'),
+    path('artists/<int:pk>/', ArtistRetrieveUpdateDestroyView.as_view(), name='artist-detail'),
+    path('albums/', AlbumListCreateView.as_view(), name='album-list-create'),
+    path('albums/<int:pk>/', AlbumRetrieveUpdateDestroyView.as_view(), name='album-detail'),
+    path('songs/', SongListCreateView.as_view(), name='song-list-create'),
+    path('songs/<int:pk>/', SongRetrieveUpdateDestroyView.as_view(), name='song-detail'),
 ]

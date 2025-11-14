@@ -5,8 +5,13 @@ from django.contrib.auth.models import User
 from .serializers import (
     UserSerializer,
     UserCreateSerializer,
-    UserUpdateSerializer
+    UserUpdateSerializer,
+    GenreSerializer,
+    ArtistSerializer,
+    AlbumSerializer,
+    SongSerializer
 )
+from app.models import Genre, Artist, Album, Song
 
 @api_view(['GET'])
 def api_healthcheck(request):
@@ -31,3 +36,35 @@ class UserUpdateView(generics.UpdateAPIView):
 class UserDeleteView(generics.DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class GenreListCreateView(generics.ListCreateAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+class GenreRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+class ArtistListCreateView(generics.ListCreateAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+
+class ArtistRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+
+class AlbumListCreateView(generics.ListCreateAPIView):
+    queryset = Album.objects.select_related('artist').all()
+    serializer_class = AlbumSerializer
+
+class AlbumRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Album.objects.select_related('artist').all()
+    serializer_class = AlbumSerializer
+
+class SongListCreateView(generics.ListCreateAPIView):
+    queryset = Song.objects.select_related('artist', 'album', 'genre').all()
+    serializer_class = SongSerializer
+
+class SongRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Song.objects.select_related('artist', 'album', 'genre').all()
+    serializer_class = SongSerializer
