@@ -6,6 +6,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from app.forms import RegisterForm, LoginForm
 from app.models import Genre, Song, Artist, Album
 
+from django.core.cache import cache
+
+CACHE_SONGS_KEY = 'songs'
+CACHE_TTL = 86400
 
 def register_view(request):
     if request.method == 'POST':
@@ -37,7 +41,12 @@ def main_view(request):
     genres = Genre.objects.all()
     genre_id = request.GET.get('genre')
     query = request.GET.get('q')
-    songs = Song.objects.all()
+
+    songs = cache.get(CACHE_SONGS_KEY)
+    if not songs:
+        songs = Song.objects.all()
+        cache.set(CACHE_SONGS_KEY, songs, CACHE_TTL)
+
     if genre_id:
         songs = songs.filter(genre_id=genre_id)
     if query:
