@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import api_healthcheck
+from .views import (
+    api_healthcheck,
+    func_for_jwt_test
+)
 from .views import (
     UserListView,
     UserCreateView,
@@ -14,6 +17,10 @@ from .views import (
     AlbumRetrieveUpdateDestroyView,
     SongListCreateView,
     SongRetrieveUpdateDestroyView
+)
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
 )
 
 urlpatterns = [
@@ -31,4 +38,7 @@ urlpatterns = [
     path('albums/<int:pk>/', AlbumRetrieveUpdateDestroyView.as_view(), name='album-detail'),
     path('songs/', SongListCreateView.as_view(), name='song-list-create'),
     path('songs/<int:pk>/', SongRetrieveUpdateDestroyView.as_view(), name='song-detail'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('check_jwt/', func_for_jwt_test),
 ]
