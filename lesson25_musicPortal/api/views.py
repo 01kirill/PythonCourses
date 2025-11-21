@@ -10,7 +10,7 @@ from .serializers import (
     GenreSerializer,
     ArtistSerializer,
     AlbumSerializer,
-    SongSerializer
+    SongSerializer, RegisterSerializer
 )
 from app.models import Genre, Artist, Album, Song
 
@@ -22,6 +22,9 @@ def api_healthcheck(request):
 @permission_classes([IsAuthenticated])
 def func_for_jwt_test(request):
     return Response({'status': 'JWT_token_ok'}, status=status.HTTP_200_OK)
+
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
 
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()

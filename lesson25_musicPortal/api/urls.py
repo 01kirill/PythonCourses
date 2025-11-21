@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     api_healthcheck,
-    func_for_jwt_test
+    func_for_jwt_test,
+    RegisterView,
 )
 from .views import (
     UserListView,
@@ -25,6 +26,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('healthcheck/', api_healthcheck),
+    path('register/', RegisterView.as_view(), name='register'),
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/create/', UserCreateView.as_view(), name='user-create'),
     path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),

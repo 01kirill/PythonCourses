@@ -2,6 +2,23 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from app.models import Genre, Artist, Album, Song
 
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'password2']
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError('Пароли не совпадают')
+        return attrs
+
+    def create(self, validated_data):
+        validated_data.pop('password2')
+        return User.objects.create_user(**validated_data)
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
