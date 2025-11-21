@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth.models import User
+from .permissions import IsManager
 from .serializers import (
     UserSerializer,
     UserCreateSerializer,
@@ -22,6 +23,11 @@ def api_healthcheck(request):
 @permission_classes([IsAuthenticated])
 def func_for_jwt_test(request):
     return Response({'status': 'JWT_token_ok'}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([IsManager])
+def func_for_manager_test(request):
+    return Response({'status': 'Manager_permission_ok'}, status=status.HTTP_200_OK)
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer

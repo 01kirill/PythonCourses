@@ -3,6 +3,7 @@ from .views import (
     api_healthcheck,
     func_for_jwt_test,
     RegisterView,
+    func_for_manager_test,
 )
 from .views import (
     UserListView,
@@ -43,4 +44,5 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('check_jwt/', func_for_jwt_test),
+    path('check_manager/', func_for_manager_test)
 ]
