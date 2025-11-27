@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -24,6 +25,16 @@ def api_healthcheck(request):
 def func_for_jwt_test(request):
     return Response({'status': 'JWT_token_ok'}, status=status.HTTP_200_OK)
 
+@swagger_auto_schema(
+    method='get',
+    operation_description="Получить статус менеджера",
+    responses={
+        200: "Доступ менеджера получен",
+        401: "Нет авторизации",
+        403: "Доступ запрещен",
+        404: "Ресурс не найден"
+    },
+)
 @api_view(['GET'])
 @permission_classes([IsManager])
 def func_for_manager_test(request):
