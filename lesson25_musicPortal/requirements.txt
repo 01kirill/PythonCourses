@@ -12,3 +12,5 @@ django-rest-framework
 drf-yasg
 djangorestframework-simplejwt
 django-redis
+celery
+redis
